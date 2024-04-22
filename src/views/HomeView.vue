@@ -1,9 +1,10 @@
-<script lang="ts" setup>
-import { useI18n } from "vue-i18n";
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import searchBar from '@/components/shared/searchBar.vue'
 
-const { t } = useI18n();
+const { t } = useI18n()
 </script>
 
 <template>
-  <h1>{{ t("pages.home.title") }}</h1>
+	<searchBar></searchBar>
 </template>

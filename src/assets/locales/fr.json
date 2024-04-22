@@ -1,7 +1,12 @@
 {
-  "pages": {
-    "home": {
-      "title": "Home"
-    }
-  }
+	"pages": {
+		"home": {
+			"title": "Projet scolaire",
+			"subTitle": "Project scolaire sans nom pour l'instant",
+			"search": "Recherchez un portfolio, un projet...",
+			"button": {
+				"searchButton": "Lancer la recherche"
+			}
+		}
+	}
 }
