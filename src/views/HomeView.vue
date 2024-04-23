@@ -11,12 +11,17 @@ const fakeData = {
 		subtitle: 'Je suis le sous titre de la carte 01',
 		content: 'Je suis le contenu de cette carte',
 	},
+	card2: {
+		title: 'Je suis la carte 02',
+		subtitle: 'Je suis le sous titre de la carte 02',
+		content: 'Je suis le contenu de cette carte',
+	},
 }
 </script>
 
 <template>
 	<searchBar></searchBar>
-	<container v-for="data in fakeData">
+	<div v-for="data in fakeData" class="d-flex align-center justify-center">
 		<card :title="data.title" :subtitle="data.subtitle" :content="data.content"></card>
-	</container>
+	</div>
 </template>

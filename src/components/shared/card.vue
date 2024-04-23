@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const props = defineProps<{
 	title: string
 	subtitle: string
@@ -9,7 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-	<v-card border="sm" width="30%" height="450" :hover="true">
+	<v-card border="sm" width="30%" height="450" :hover="true" class="mx-2 my-2">
 		<v-card-title>{{ props.title }}</v-card-title>
 		<v-card-subtitle>{{ props.subtitle }}</v-card-subtitle>
 		<v-card-text>{{ props.content }}</v-card-text>
