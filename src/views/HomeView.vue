@@ -16,12 +16,38 @@ const fakeData = {
 		subtitle: 'Je suis le sous titre de la carte 02',
 		content: 'Je suis le contenu de cette carte',
 	},
+	card3: {
+		title: 'Je suis la carte 03',
+		subtitle: 'Je suis le sous titre de la carte 02',
+		content: 'Je suis le contenu de cette carte',
+	},
+	card4: {
+		title: 'Je suis la carte 04',
+		subtitle: 'Je suis le sous titre de la carte 02',
+		content: 'Je suis le contenu de cette carte',
+	},
+	card5: {
+		title: 'Je suis la carte 05',
+		subtitle: 'Je suis le sous titre de la carte 02',
+		content: 'Je suis le contenu de cette carte',
+	}, 
+	card6: {
+		title: 'Je suis la carte 06',
+		subtitle: 'Je suis le sous titre de la carte 02',
+		content: 'Je suis le contenu de cette carte',
+	}, 
+	card7: {
+		title: 'Je suis la carte 07',
+		subtitle: 'Je suis le sous titre de la carte 02',
+		content: 'Je suis le contenu de cette carte',
+	}, 
 }
 </script>
 
 <template>
 	<searchBar></searchBar>
-	<div v-for="data in fakeData" class="d-flex align-center justify-center">
-		<card :title="data.title" :subtitle="data.subtitle" :content="data.content"></card>
+	<div class="d-flex flex-wrap">
+			<!-- Un onClick redirigera vers la page de détail de la carte -->
+			<card v-for="data in fakeData" :title="data.title" :subtitle="data.subtitle" :content="data.content"></card>
 	</div>
 </template>
