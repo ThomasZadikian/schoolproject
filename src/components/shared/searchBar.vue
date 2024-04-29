@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
+import colorsEnum from '@/core/types/enums/colorsEnum'
 
 const { t } = useI18n()
 const searchInput = ref()
@@ -19,9 +20,14 @@ const search = (searchInput: string) => {
 			prepend-inner-icon="mdi-alert"
 			:label="t('pages.home.search')"
 			placeholder="..."
+			:bg-color="colorsEnum.BG_CARD"
 		></v-text-field>
-		<v-btn class="mb-5" variant="elevated" @click="search(searchInput)">{{
-			t('pages.home.button.searchButton')
-		}}</v-btn>
+		<v-btn
+			class="mb-5"
+			variant="elevated"
+			@click="search(searchInput)"
+			:color="colorsEnum.BG_CARD"
+			>{{ t('pages.home.button.searchButton') }}</v-btn
+		>
 	</v-container>
 </template>
