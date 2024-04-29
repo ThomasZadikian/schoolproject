@@ -3,22 +3,30 @@ import colorsEnum from '@/core/types/enums/colorsEnum'
 
 const props = defineProps<{
 	title: string
-	subtitle: string
-	content: string
+	image: string
 }>()
 </script>
 
 <template>
 	<v-card
 		:border="false"
+		rounded="xl"
 		width="30%"
-		height="450"
+		height="350"
 		:hover="true"
-		class="mx-2 my-2"
+		class="mx-3 my-5"
 		:color="colorsEnum.BG_CARD"
 	>
 		<v-card-title>{{ props.title }}</v-card-title>
-		<v-card-subtitle>{{ props.subtitle }}</v-card-subtitle>
-		<v-card-text>{{ props.content }}</v-card-text>
+		<!-- Définir le style dans la balise correpondante plus tard -->
+		<img class="image-card" alt="" :src="props.image"></img>
 	</v-card>
 </template>
+
+<style scoped>
+.image-card {
+	width: 100%; 
+	height: 100%; 
+	border-radius: 5px;
+}
+</style>

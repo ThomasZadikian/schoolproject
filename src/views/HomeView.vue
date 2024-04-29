@@ -8,47 +8,40 @@ const { t } = useI18n()
 const fakeData = {
 	card1: {
 		title: 'Je suis la carte 01',
-		subtitle: 'Je suis le sous titre de la carte 01',
-		content: 'Je suis le contenu de cette carte',
+		image: 'https://picsum.photos/200/300',
 	},
 	card2: {
 		title: 'Je suis la carte 02',
-		subtitle: 'Je suis le sous titre de la carte 02',
-		content: 'Je suis le contenu de cette carte',
+		image: 'https://picsum.photos/200/400',
 	},
 	card3: {
 		title: 'Je suis la carte 03',
-		subtitle: 'Je suis le sous titre de la carte 02',
-		content: 'Je suis le contenu de cette carte',
+		image: 'https://picsum.photos/210/300',
 	},
 	card4: {
 		title: 'Je suis la carte 04',
-		subtitle: 'Je suis le sous titre de la carte 02',
-		content: 'Je suis le contenu de cette carte',
+		image: 'https://picsum.photos/250/300',
 	},
 	card5: {
 		title: 'Je suis la carte 05',
-		subtitle: 'Je suis le sous titre de la carte 02',
-		content: 'Je suis le contenu de cette carte',
-	}, 
+		image: 'https://picsum.photos/205/300',
+	},
 	card6: {
 		title: 'Je suis la carte 06',
-		subtitle: 'Je suis le sous titre de la carte 02',
-		content: 'Je suis le contenu de cette carte',
-	}, 
+		image: 'https://picsum.photos/236/300',
+	},
 	card7: {
 		title: 'Je suis la carte 07',
-		subtitle: 'Je suis le sous titre de la carte 02',
-		content: 'Je suis le contenu de cette carte',
-	}, 
+		image: 'https://picsum.photos/200/305',
+	},
 }
 </script>
 
 <template>
 	<searchBar></searchBar>
 	<div class="d-flex flex-wrap">
-			<!-- Un onClick redirigera vers la page de détail de la carte -->
-			<card v-for="data in fakeData" :title="data.title" :subtitle="data.subtitle" :content="data.content"></card>
+		<!-- Un onClick redirigera vers la page de détail de la carte -->
+		<card v-for="data in fakeData" :title="data.title" :image="data.image"></card>
 	</div>
 	<navigator></navigator>
 </template>

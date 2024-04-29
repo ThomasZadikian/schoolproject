@@ -5,3 +5,7 @@ main {
 * {
 	color: white;
 }
+
+.blur-bg {
+	backdrop-filter: blur(50);
+}
