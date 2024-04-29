@@ -1,0 +1,17 @@
+{
+	"pages": {
+		"home": {
+			"title": "Scholar project",
+			"subTitle": "Scholar project without any name for the moment",
+			"search": "Seacrh a portfolio, a project..",
+			"button": {
+				"searchButton": "Search"
+			}
+		}
+	},
+	"navigator": {
+		"home": "Home",
+		"portfolio": "Portfolio",
+		"movie": "Videos"
+	}
+}

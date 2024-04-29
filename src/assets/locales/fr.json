@@ -8,5 +8,10 @@
 				"searchButton": "Lancer la recherche"
 			}
 		}
+	},
+	"navigator": {
+		"home": "Accueil",
+		"portfolio": "Portfolio",
+		"movie": "Vidéo"
 	}
 }
