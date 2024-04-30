@@ -1,7 +1,8 @@
 import db from './connectDatabase.js'
 
 const mockValues = {
-	mockUser: `INSERT INTO Utilisateurs (
+	mockUser: `
+    INSERT INTO Utilisateurs (
         nom,
         prenom,
         email,
@@ -28,7 +29,8 @@ const mockValues = {
         datetime('now'),
         1,
         1
-    ), (
+    ), 
+    (
         'Doe',
         'John',
         'john.doe@example.com',
