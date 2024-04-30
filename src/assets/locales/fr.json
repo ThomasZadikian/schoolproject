@@ -1,4 +1,10 @@
 {
+	"general": {
+		"database": {
+			"created": "La base de données à correctement été initialisée",
+			"createError": "Une erreur est survenue durant la création de la base de données"
+		}
+	},
 	"pages": {
 		"home": {
 			"title": "Projet scolaire",

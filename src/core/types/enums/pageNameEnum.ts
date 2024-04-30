@@ -1,5 +1,5 @@
 enum PageNameEnum {
-  HOME = "Home",
+	HOME = 'Home',
 }
 
-export default PageNameEnum;
+export default PageNameEnum
