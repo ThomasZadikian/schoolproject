@@ -1,6 +1,7 @@
 import db from './connectDatabase.js'
+import type { querieModel } from '@/core/models/querieModel.js'
 
-const mockValues = {
+const mockValues: querieModel = {
 	mockUser: `
     INSERT INTO Utilisateurs (
         nom,

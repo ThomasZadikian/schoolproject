@@ -1,6 +1,7 @@
 import db from './connectDatabase.js'
+import type { querieModel } from '@/core/models/querieModel'
 
-const sqlQueries = {
+const sqlQueries: querieModel = {
 	createRole: `
     CREATE TABLE roles (
     role_id INTEGER PRIMARY KEY,
