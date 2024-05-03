@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import searchBar from '@/components/shared/searchBar.vue'
 import card from '@/components/shared/card.vue'
 import navigator from '@/components/shared/navigator.vue'
+
 const { t } = useI18n()
 // Des stores (pinia) remplaceront fakeData
 const fakeData = {
