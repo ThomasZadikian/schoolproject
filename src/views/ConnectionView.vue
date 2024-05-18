@@ -57,7 +57,3 @@ const login = async () => {
     </v-container>
     <navigator></navigator>
   </template>
-  
-  <style scoped>
-  </style>
-  
