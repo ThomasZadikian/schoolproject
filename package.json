@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"node server.cjs\"", 
+    "dev": "concurrently \"vite\" \"node server.cjs\"",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest --watch false --coverage",
@@ -12,6 +12,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "mysql2": "^3.9.7",
     "pinia": "^2.1.7",
     "vue": "^3.4.23",
@@ -33,6 +34,7 @@
     "@vue/test-utils": "^2.4.5",
     "@vue/tsconfig": "^0.5.1",
     "axios-mock-adapter": "^1.22.0",
+    "concurrently": "^8.2.2",
     "express": "^4.19.2",
     "jsdom": "^24.0.0",
     "sass": "^1.75.0",

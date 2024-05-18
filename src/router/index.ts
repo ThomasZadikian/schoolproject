@@ -13,7 +13,10 @@ const unguarded = ["/login", "/logout"];
 // create router
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [route("/", PageNameEnum.HOME)],
+  routes : [
+    route("/", PageNameEnum.HOME),
+    route("/Register", PageNameEnum.REGISTER), 
+  ]
 });
 
 // set up auth and guard routes

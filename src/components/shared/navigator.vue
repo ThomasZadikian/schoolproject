@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import colorsEnum from '@/core/types/enums/colorsEnum'
+import PageNameEnum from '@/core/types/enums/pageNameEnum';
+import router from '@/router';
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -7,7 +9,7 @@ const { t } = useI18n()
 
 <template>
 	<v-bottom-navigation elevation="5" :bg-color="colorsEnum.BG_DARK" :grow="true" class="blur-bg">
-		<v-btn :value="t('navigator.home')">
+		<v-btn :value="t('navigator.home')" @click="router.push({name : PageNameEnum.HOME})">
 			<!-- L'accueil est le lieu où tout les portfolio apraissent -->
 			<v-icon>mdi-history</v-icon>
 
