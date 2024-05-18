@@ -5,10 +5,8 @@ import card from '@/components/shared/card.vue'
 import navigator from '@/components/shared/navigator.vue'
 import UserOptions from '@/components/shared/userOptions.vue';
 const { t } = useI18n()
-import { useUserStore } from '@/store/userUserStore';
-// Des stores (pinia) remplaceront fakeData
 
-const userStore = useUserStore(); 
+// Des stores (pinia) remplaceront fakeData
 const fakeData = {
 	card1: {
 		title: 'Je suis la carte 01',
@@ -40,16 +38,12 @@ const fakeData = {
 	},
 }
 
-if(userStore.$id) {
-	console.log(userStore.getUser()); 
-}
 </script>
 
 <template>
 	<searchBar></searchBar>
 	<UserOptions></UserOptions>
 	<div class="d-flex flex-wrap">
-		{{ userStore.getUser() }}
 		<!-- Un onClick redirigera vers la page de détail de la carte -->
 		<card v-for="data in fakeData" :title="data.title" :image="data.image"></card>
 	</div>

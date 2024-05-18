@@ -6,14 +6,18 @@ import router from "@/router";
 import i18n from '@/plugins/i18n'
 import vuetify from '@/plugins/vuetify'
 import { registerLayouts } from './components/layouts/register'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import 'vue3-toastify/dist/index.css'
 
 const app = createApp(App);
+const pinia = createPinia(); 
+pinia.use(piniaPluginPersistedstate)
 
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 app.use(vuetify)
 app.use(i18n)
