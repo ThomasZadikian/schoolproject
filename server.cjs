@@ -73,10 +73,21 @@ app.post('/api/login', async (req, res) => {
       role: result[0].role,
       registration_date: result[0].registration_date
     };
-    console.log(userObject);
     res.json(userObject);
   } catch (error) {
     console.error('Erreur lors de la connexion de l\'utilisateur :', error);
+    res.status(500).send('Erreur Serveur Interne');
+  }
+});
+
+// Route delete user
+app.post('/api/delete', async (req, res) => {
+  const {email, lastName} = req.body;
+  try {
+    await pool.execute('DELETE FROM users WHERE last_name = ? AND email = ?', [lastName, email]);
+    res.json({ message: 'Utilisateur supprimé avec succès' });
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'utilisateur :', error);
     res.status(500).send('Erreur Serveur Interne');
   }
 });
