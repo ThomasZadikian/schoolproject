@@ -131,3 +131,6 @@ CREATE TABLE statistics (
     likes_given INT NOT NULL,
     messages_sent INT NOT NULL
 );
+
+INSERT INTO users (last_name, first_name, email, password, bio, role, registration_date)
+      VALUES ('ADMIN','ADMIN','admin@admin.fr','ADMIN','Adminstrator',ADMIN,NOW())

@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import colorsEnum from '@/core/types/enums/colorsEnum'
+import userOptions from './userOptions.vue';
 
 const { t } = useI18n()
 const searchInput = ref()
@@ -30,4 +31,5 @@ const search = (searchInput: string) => {
 			>{{ t('pages.home.button.searchButton') }}</v-btn
 		>
 	</v-container>
+	<userOptions></userOptions>
 </template>

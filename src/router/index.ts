@@ -17,6 +17,7 @@ const router = createRouter({
     route("/", PageNameEnum.HOME),
     route("/Register", PageNameEnum.REGISTER), 
     route("/Connection", PageNameEnum.CONNECTION), 
+    route("/UserInformations", PageNameEnum.USER_INFORMATIONS), 
   ]
 });
 

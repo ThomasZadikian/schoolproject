@@ -20,7 +20,7 @@ const deconnection = () => {
 		<v-btn @click="router.push({name : PageNameEnum.CONNECTION})" variant="text" prepend-icon="mdi-account">Se connecter</v-btn>
 	</div>
 	<div v-else>
-		<v-btn @click="router.push({name : PageNameEnum.CONNECTION})" variant="text" prepend-icon="mdi-account">Profil utilisateur</v-btn>
+		<v-btn @click="router.push({name : PageNameEnum.USER_INFORMATIONS})" variant="text" prepend-icon="mdi-account">Profil utilisateur</v-btn>
 		<v-btn @click="deconnection" variant="text" prepend-icon="mdi-account">Se déconnecter</v-btn>
 	</div>
 </template>

@@ -15,8 +15,8 @@ export const useUserStore = defineStore('user', {
             this.user = user; 
         }, 
         clearUser(){
-            this.user = null; 
             sessionStorage.clear(); 
+            this.user = null; 
         },
         getUser() {
             return this.user; 
@@ -24,5 +24,6 @@ export const useUserStore = defineStore('user', {
     },
     persist: {
         storage: sessionStorage,
+        paths: ['user']
       },
 }); 
