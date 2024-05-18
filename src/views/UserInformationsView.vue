@@ -2,13 +2,12 @@
 import { useI18n } from 'vue-i18n'
 import searchBar from '@/components/shared/searchBar.vue'
 import navigator from '@/components/shared/navigator.vue'
-
-const { t } = useI18n()
 import { useUserStore } from '@/store/userUserStore';
 import colorsEnum from '@/core/types/enums/colorsEnum';
 import router from '@/router';
 import PageNameEnum from '@/core/types/enums/pageNameEnum';
 
+const { t } = useI18n()
 const userStore = useUserStore()
 const user = userStore.getUser(); 
 
@@ -23,7 +22,7 @@ const deleteAccount = async () => {
                 body: JSON.stringify({
                     email: user.email,
                     lastName: user.last_name,
-                }) // N'oubliez pas cette accolade fermante
+                })
             });
             if (!response.ok) {
                 throw new Error('Erreur lors de la connexion');

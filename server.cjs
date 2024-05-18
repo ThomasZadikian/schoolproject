@@ -21,17 +21,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Define your API routes
 app.post('/api/users', async (req, res) => {
+  let conn; 
   const newUser = req.body;
   try {
-    const connection = await pool.getConnection((err, connection) => {
-      if (err) {
-        console.error('Error connecting to database:', err);
-        return;
-      }
-      console.log('Connected to database');
-      connection.release();
-    });;
-    const [result] = await connection.execute(
+    conn = await pool.getConnection();
+    const [result] = await pool.execute(
       `INSERT INTO users (last_name, first_name, email, password, bio, role, registration_date)
       VALUES (?,?,?,?,?,?,NOW())`,
       [
@@ -49,15 +43,19 @@ app.post('/api/users', async (req, res) => {
     console.error('Error creating user:', error);
     res.status(500).send('Internal Server Error');
   } finally {
-    connection.release();
+    if(conn) {
+      conn.release();
+    }
   }
 });
 
 
 // Route connect user
 app.post('/api/login', async (req, res) => {
+  let conn; 
   const { email, password } = req.body;
   try {
+    conn = await pool.getConnection();
     const [result] = await pool.execute('SELECT * FROM users WHERE email = ? AND password = ?', [email, password]);
     if (result.length === 0) {
       return res.status(401).json({ message: 'L\'utilisateur avec cet email n\'existe pas' });
@@ -77,18 +75,28 @@ app.post('/api/login', async (req, res) => {
   } catch (error) {
     console.error('Erreur lors de la connexion de l\'utilisateur :', error);
     res.status(500).send('Erreur Serveur Interne');
+  } finally {
+    if (conn) {
+      conn.release(); 
+    }
   }
 });
 
 // Route delete user
 app.post('/api/delete', async (req, res) => {
   const {email, lastName} = req.body;
+  let conn;
   try {
+    conn = await pool.getConnection();
     await pool.execute('DELETE FROM users WHERE last_name = ? AND email = ?', [lastName, email]);
     res.json({ message: 'Utilisateur supprimé avec succès' });
   } catch (error) {
     console.error('Erreur lors de la suppression de l\'utilisateur :', error);
     res.status(500).send('Erreur Serveur Interne');
+  } finally {
+    if (conn) {
+      conn.release(); 
+    }
   }
 });
 
