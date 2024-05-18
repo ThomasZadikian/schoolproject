@@ -10,5 +10,5 @@ const { t } = useI18n()
 
 <template>
 		<v-btn @click="router.push({name : PageNameEnum.REGISTER})" variant="text" prepend-icon="mdi-account">Créer un compte</v-btn>
-		<v-btn variant="text" prepend-icon="mdi-account">Profil utilisateur</v-btn>
+		<v-btn @click="router.push({name : PageNameEnum.CONNECTION})" variant="text" prepend-icon="mdi-account">Profil utilisateur</v-btn>
 </template>

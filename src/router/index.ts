@@ -16,6 +16,7 @@ const router = createRouter({
   routes : [
     route("/", PageNameEnum.HOME),
     route("/Register", PageNameEnum.REGISTER), 
+    route("/Connection", PageNameEnum.CONNECTION), 
   ]
 });
 
