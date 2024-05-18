@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import router from '@/router';
-import { route } from '@/router/helpers';
 import { useI18n } from 'vue-i18n'
 import PageNameEnum from "@/core/types/enums/pageNameEnum";
 import { useUserStore } from '@/store/userUserStore';
