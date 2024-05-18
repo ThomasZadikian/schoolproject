@@ -3,20 +3,6 @@ import { useI18n } from 'vue-i18n'
 import searchBar from '@/components/shared/searchBar.vue'
 import card from '@/components/shared/card.vue'
 import navigator from '@/components/shared/navigator.vue'
-import upsert from '@/database/upsertQueries'
-
-const upsertDataTest = async () => {
-	try {
-		upsert('test', {
-			testName: 'ExampleTest',
-    		testAge: 30,
-    		testDate: new Date('2024-05-05'),
-    		testVarchar: 'example'
-		})
-	} catch(error) {
-		console.error(error); 
-	}
-}
 const { t } = useI18n()
 // Des stores (pinia) remplaceront fakeData
 const fakeData = {
@@ -53,7 +39,6 @@ const fakeData = {
 
 <template>
 	<searchBar></searchBar>
-	<v-button @click="upsertDataTest">Ajouter une donnée</v-button>
 	<div class="d-flex flex-wrap">
 		<!-- Un onClick redirigera vers la page de détail de la carte -->
 		<card v-for="data in fakeData" :title="data.title" :image="data.image"></card>
