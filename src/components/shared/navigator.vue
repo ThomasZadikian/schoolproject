@@ -3,8 +3,11 @@ import colorsEnum from '@/core/types/enums/colorsEnum'
 import PageNameEnum from '@/core/types/enums/pageNameEnum';
 import router from '@/router';
 import { useI18n } from 'vue-i18n'
+import { useUserStore } from '@/store/userUserStore';
+import RoleEnum from '@/core/types/enums/roleEnum';
 
 const { t } = useI18n()
+const userStore = useUserStore(); 
 </script>
 
 <template>
@@ -16,12 +19,20 @@ const { t } = useI18n()
 			<span>{{ t('navigator.home') }}</span>
 		</v-btn>
 
-		<v-btn :value="t('navigator.portfolio')">
+		<v-btn v-if="userStore.user?.role === RoleEnum.ARTIST" :value="t('navigator.portfolio')">
 			<!-- Affiche le portfolio de l'utilisateur -->
 
 			<v-icon>mdi-pencil</v-icon>
 
 			<span>{{ t('navigator.portfolio') }}</span>
+		</v-btn>
+
+		<v-btn v-else>
+			<!-- Permet de créer un portfolio -->
+
+			<v-icon>mdi-invoice-plus</v-icon>
+
+			<span>Créez votre portfolio</span>
 		</v-btn>
 
 		<v-btn :value="t('navigator.video')">

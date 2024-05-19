@@ -1,7 +1,7 @@
 enum RoleEnum {
-	ARTIST = 'Artist',
-    USER = 'User', 
-    ADMIN = 'Admin'
+	ARTIST = 'artist',
+    USER = 'user', 
+    ADMIN = 'admin'
 }
 
 export default RoleEnum
