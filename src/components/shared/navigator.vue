@@ -19,7 +19,7 @@ const userStore = useUserStore();
 			<span>{{ t('navigator.home') }}</span>
 		</v-btn>
 
-		<v-btn v-if="userStore.user?.role === RoleEnum.ARTIST" :value="t('navigator.portfolio')">
+		<v-btn v-if="userStore.user?.portfolio_id != null" :value="t('navigator.portfolio')">
 			<!-- Affiche le portfolio de l'utilisateur -->
 
 			<v-icon>mdi-pencil</v-icon>
@@ -27,7 +27,7 @@ const userStore = useUserStore();
 			<span>{{ t('navigator.portfolio') }}</span>
 		</v-btn>
 
-		<v-btn v-else>
+		<v-btn v-else @click="router.push({name : PageNameEnum.CREATE_PORTFOLIO})">
 			<!-- Permet de créer un portfolio -->
 
 			<v-icon>mdi-invoice-plus</v-icon>

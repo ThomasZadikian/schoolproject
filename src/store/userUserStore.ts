@@ -20,7 +20,12 @@ export const useUserStore = defineStore('user', {
         },
         getUser() {
             return this.user; 
-        }
+        },
+        retrieveUserPortfolioId(portfolioID: number) {
+            if(this.user){
+                this.user.portfolio_id = portfolioID; 
+            }
+        }        
     },
     persist: {
         storage: sessionStorage,

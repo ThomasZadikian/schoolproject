@@ -36,15 +36,15 @@ const login = async () => {
           errorVisible.value = true; 
           errorText.value = ErrorEnum.LOGIN_INVALID
           errorColor.value = colorsEnum.WARNING; 
+        } else {
+          const data: User = await response.json();
+          userStore.setUser(data);
+          errorVisible.value = true; 
+          errorText.value = ErrorEnum.CONNECTION_SUCCESS; 
+          errorColor.value = colorsEnum.SUCCESS; 
         }
-        const data: User = await response.json();
-        userStore.setUser(data);
-        errorVisible.value = true; 
-        errorText.value = ErrorEnum.CONNECTION_SUCCESS; 
-        errorColor.value = colorsEnum.SUCCESS; 
-
-        setTimeout(() => {
-          router.push({name: PageNameEnum.HOME})
+        setTimeout( async () => {
+          await router.push({name: PageNameEnum.HOME})
         }, 1000)
       } catch (error) {
         errorVisible.value = true; 

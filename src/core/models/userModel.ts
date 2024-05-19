@@ -11,9 +11,10 @@ export interface RegistrationUser {
 }
 
 export interface User extends RegistrationUser {
-    id : number; 
+    user_id : number; 
     role : RoleEnum; 
     avatar_id: number, 
+    portfolio_id? : number; 
 }
 
 export interface UserLogin {

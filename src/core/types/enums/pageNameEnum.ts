@@ -3,6 +3,7 @@ enum PageNameEnum {
 	REGISTER = 'Register', 
 	CONNECTION = 'Connection', 
 	USER_INFORMATIONS = 'UserInformations', 
+	CREATE_PORTFOLIO = "CreatePortfolio", 
 }
 
 export default PageNameEnum
