@@ -1,5 +1,3 @@
-import RoleEnum from "../types/enums/roleEnum";
-
 export interface PortFolioModel {
     user_id : number; 
     title : string; 

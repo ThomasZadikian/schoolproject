@@ -2,21 +2,22 @@ const connection = require('../../../../connectionPool.cjs');
 
 
 async function portfolioCreate (req, res) {
-    let conn; 
-    const portfolioData = req.body;
-    conn = await connection.getConnection();
-    try {
-        const [portfolioExist] = await conn.execute('SELECT * FROM portfolios WHERE user_id = ?', [portfolioData.user_id]);
-        if(portfolioExist.length === 0 ) {
-          const [result] = await conn.execute(
-            `INSERT INTO portfolios (user_id, title, description, creation_date, visible )
-            VALUES (?,?,?,NOW(),1)`,
-            [
-            portfolioData.user_id,
-            portfolioData.title,
-            portfolioData.description,
-            ]
-          );
+  let conn; 
+  const portfolioData = req.body;
+  conn = await connection.getConnection();
+  try {
+    const [portfolioExist] = await conn.execute('SELECT * FROM portfolios WHERE user_id = ?', [portfolioData.user_id]);
+    if(portfolioExist.length === 0 ) {
+      console.log(portfolioExist)
+      const [result] = await conn.execute(
+        `INSERT INTO portfolios (user_id, title, description, creation_date, visible )
+        VALUES (?,?,?,NOW(),1)`,
+        [
+          portfolioData.user_id,
+          portfolioData.title,
+          portfolioData.description,
+        ]
+      );
           if(result){
             const [portfolioIDResult] = await conn.execute(
               `SELECT portfolio_id FROM portfolios WHERE user_id = ?`, [portfolioData.user_id]
