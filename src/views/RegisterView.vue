@@ -6,8 +6,11 @@ import type { RegistrationUser } from '@/core/models/userModel'
 import { ref, type Ref } from 'vue';
 import router from '@/router';
 import PageNameEnum from '@/core/types/enums/pageNameEnum';
-const { t } = useI18n()
+import error from '@/components/shared/error.vue';
+import ErrorEnum from '@/core/types/enums/errorEnum';
+import colorsEnum from '@/core/types/enums/colorsEnum';
 
+const { t } = useI18n()
 const formData: Ref<RegistrationUser> = ref({
       last_name: '',
       first_name: '',
@@ -17,10 +20,15 @@ const formData: Ref<RegistrationUser> = ref({
       registration_date: new Date()
     });
 
+const errorVisible = ref(false); 
+const errorText = ref(''); 
+const errorColor = ref(''); 
+
+
     // Méthode pour soumettre le formulaire
 const submitForm = async () => {
   formData.value.registration_date = new Date(); 
-    const response = await fetch('/api/users', {
+    const response = await fetch('/api/create', {
       method: 'POST', 
       headers: {
         'Content-Type':'application/json'
@@ -28,21 +36,27 @@ const submitForm = async () => {
       body: JSON.stringify(formData.value)
     }); 
     if(!response.ok) {
-      throw new Error('Erreur lors de la requête POST');
+      errorVisible.value = true; 
+      errorText.value = ErrorEnum.REGISTRATION_INVALID
+      errorColor.value = colorsEnum.WARNING; 
+      setTimeout(() => {
+        router.go(0); 
+      }, 1000)
     }
     const responseData = await response.json();
-    console.log('Réponse du serveur :', responseData);
-
+    errorVisible.value = true; 
+    errorText.value = ErrorEnum.REGISTRATION_VALID
+    errorColor.value = colorsEnum.SUCCESS; 
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     router.push({ name: PageNameEnum.HOME });
-
 }
 
 </script>
 
 <template>
-    <searchBar></searchBar>
+  <searchBar></searchBar>
+  <error :visible="errorVisible" :message="errorText" :color="errorColor"></error>
     <v-form @submit.prevent="submitForm">
       <v-container>
         <v-row>

@@ -6,10 +6,17 @@ import { useUserStore } from '@/store/userUserStore';
 import colorsEnum from '@/core/types/enums/colorsEnum';
 import router from '@/router';
 import PageNameEnum from '@/core/types/enums/pageNameEnum';
+import error from '@/components/shared/error.vue';
+import ErrorEnum from '@/core/types/enums/errorEnum';
+import { ref } from 'vue';
 
 const { t } = useI18n()
 const userStore = useUserStore()
 const user = userStore.getUser(); 
+
+const errorVisible = ref(false); 
+const errorText = ref(''); 
+const errorColor = ref(''); 
 
 const deleteAccount = async () => {
     if (user != null) {
@@ -25,15 +32,33 @@ const deleteAccount = async () => {
                 })
             });
             if (!response.ok) {
-                throw new Error('Erreur lors de la connexion');
+              errorVisible.value = true; 
+      errorText.value = ErrorEnum.DELETE_FAILED
+      errorColor.value = colorsEnum.WARNING; 
+      setTimeout(() => {
+        router.go(0); 
+      }, 1000)
             }
             userStore.clearUser();
-            router.push({ name: PageNameEnum.HOME });
+            errorVisible.value = true; 
+            errorText.value = ErrorEnum.DELETE_SUCCESS
+            errorColor.value = colorsEnum.SUCCESS; 
+          setTimeout( async () => {
+           await router.push({name : PageNameEnum.HOME});
+          },1000)
         } catch (error) {
-            console.error('Erreur de connexion:', error);
+          errorText.value = ErrorEnum.CONNECTION_NOT_FOUND
+      errorColor.value = colorsEnum.WARNING; 
+      setTimeout(() => {
+        router.go(0); 
+      }, 1000)
         }
     } else {
-        console.log('User est vide');
+      errorText.value = ErrorEnum.UNAUTHORIZED_ACCESS
+      errorColor.value = colorsEnum.WARNING; 
+      setTimeout( async() => {
+        await router.push({name : PageNameEnum.HOME}); 
+      }, 1000)
     }
 };
 
@@ -41,6 +66,7 @@ const deleteAccount = async () => {
 </script>
 <template>
     <searchBar></searchBar>
+    <error :visible="errorVisible" :message="errorText" :color="errorColor"></error>
     <v-container v-if="user">
       <v-card :color="colorsEnum.BG_CARD">
         <v-card-title>Informations Utilisateur</v-card-title>

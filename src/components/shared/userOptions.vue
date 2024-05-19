@@ -14,8 +14,6 @@ const deconnection = async () => {
 	await userStore.clearUser(); 
 	router.go(0); 
 }
-
-console.log(userStore.user)
 </script>
 
 <template>
