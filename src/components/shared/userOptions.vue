@@ -8,10 +8,11 @@ import RoleEnum from '@/core/types/enums/roleEnum';
 
 const userStore = useUserStore(); 
 
+
 const { t } = useI18n()
 const deconnection = async () => {
 	await userStore.clearUser(); 
-	router.push({name : PageNameEnum.HOME}); 
+	router.go(0); 
 }
 
 console.log(userStore.user)

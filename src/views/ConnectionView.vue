@@ -7,11 +7,17 @@ import type { User, UserLogin } from '@/core/models/userModel';
 import router from '@/router';
 import PageNameEnum from '@/core/types/enums/pageNameEnum';
 import { useUserStore } from '@/store/userUserStore';
+import error from '@/components/shared/error.vue';
+import ErrorEnum from '@/core/types/enums/errorEnum';
 
 const formData: Ref<UserLogin> = ref({
   email: "", 
   password: ""
 })
+
+const errorVisible = ref(false); 
+const errorText = ref(''); 
+const errorColor = ref(''); 
 
 const userStore = useUserStore()
 const login = async () => { 
@@ -27,19 +33,30 @@ const login = async () => {
           })
         });
         if (!response.ok) {
-          throw new Error('Erreur lors de la connexion');
+          errorVisible.value = true; 
+          errorText.value = ErrorEnum.LOGIN_INVALID
+          errorColor.value = colorsEnum.WARNING; 
         }
         const data: User = await response.json();
         userStore.setUser(data);
+        errorVisible.value = true; 
+        errorText.value = ErrorEnum.CONNECTION_SUCCESS; 
+        errorColor.value = colorsEnum.SUCCESS; 
 
-        router.push({name: PageNameEnum.HOME})
+        setTimeout(() => {
+          router.push({name: PageNameEnum.HOME})
+        }, 1000)
       } catch (error) {
-        console.error('Erreur de connexion:', error);
+        errorVisible.value = true; 
+        errorText.value = ErrorEnum.CONNECTION_NOT_FOUND; 
+        errorColor.value = colorsEnum.WARNING; 
+
       }
     }; 
 </script>
 
 <template>
+  <error :visible="errorVisible" :message="errorText" :color="errorColor"></error>
   <search-bar></search-bar>
     <v-container>
       <v-card :color="colorsEnum.BG_CARD" class="mx-auto" max-width="400">

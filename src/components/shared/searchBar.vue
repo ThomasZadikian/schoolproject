@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import colorsEnum from '@/core/types/enums/colorsEnum'
 import userOptions from './userOptions.vue';
+import error from './error.vue';
 
 const { t } = useI18n()
 const searchInput = ref()
@@ -10,6 +11,8 @@ const searchInput = ref()
 const search = (searchInput: string) => {
 	// Create here the search logic
 }
+
+let visibel = false
 </script>
 
 <template>

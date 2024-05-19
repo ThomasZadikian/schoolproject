@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import searchBar from '@/components/shared/searchBar.vue'
 import card from '@/components/shared/card.vue'
 import navigator from '@/components/shared/navigator.vue'
+
 const { t } = useI18n()
 
 // Des stores (pinia) remplaceront fakeData
@@ -36,7 +37,6 @@ const fakeData = {
 		image: 'https://picsum.photos/200/305',
 	},
 }
-
 </script>
 
 <template>
@@ -45,5 +45,7 @@ const fakeData = {
 		<!-- Un onClick redirigera vers la page de détail de la carte -->
 		<card v-for="data in fakeData" :title="data.title" :image="data.image"></card>
 	</div>
+
 	<navigator></navigator>
+
 </template>
