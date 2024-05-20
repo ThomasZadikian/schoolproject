@@ -46,8 +46,8 @@ const createValidation = async () => {
               errorText.value = ErrorEnum.DELETE_SUCCESS
               errorColor.value = colorsEnum.SUCCESS;
               data = await response.json(); 
+              userStore.retrieveUserPortfolioId(data.portfolio_id); 
               setTimeout(async() => {
-                userStore.retrieveUserPortfolioId(data.portfolio_id); 
                 await router.push({name : PageNameEnum.HOME})
               }, 1000);
             }

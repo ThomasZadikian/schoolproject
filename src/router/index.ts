@@ -19,6 +19,7 @@ const router = createRouter({
     route("/Connection", PageNameEnum.CONNECTION), 
     route("/UserInformations", PageNameEnum.USER_INFORMATIONS), 
     route("/CreatePortfolio", PageNameEnum.CREATE_PORTFOLIO), 
+    route("/PortfolioGestion", PageNameEnum.GESTION_PORTFOLIO), 
   ]
 });
 

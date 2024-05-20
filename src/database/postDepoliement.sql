@@ -132,5 +132,8 @@ CREATE TABLE statistics (
     messages_sent INT NOT NULL
 );
 
+ALTER TABLE users
+ADD FOREIGN KEY (`portfolio_id`) REFERENCES `portfolios` (`portfolio_id`) ON DELETE CASCADE;
+
 INSERT INTO users (last_name, first_name, email, password, bio, role, registration_date)
       VALUES ('ADMIN','ADMIN','admin@admin.fr','ADMIN','Adminstrator',ADMIN,NOW())

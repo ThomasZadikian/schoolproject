@@ -8,7 +8,6 @@ async function portfolioCreate (req, res) {
   try {
     const [portfolioExist] = await conn.execute('SELECT * FROM portfolios WHERE user_id = ?', [portfolioData.user_id]);
     if(portfolioExist.length === 0 ) {
-      console.log(portfolioExist)
       const [result] = await conn.execute(
         `INSERT INTO portfolios (user_id, title, description, creation_date, visible )
         VALUES (?,?,?,NOW(),1)`,

@@ -77,8 +77,11 @@ const deleteAccount = async () => {
             <v-col cols="6">
               <v-text-field v-model="user.first_name" label="Prénom" readonly></v-text-field>
             </v-col>
-            <v-col cols="12">
+            <v-col cols="6">
               <v-text-field v-model="user.email" label="Email" readonly></v-text-field>
+            </v-col>
+            <v-col v-if="user.portfolio_id" cols="6">
+              <v-text-field v-model="user.portfolio_id" label="Numéro du Portfolio" readonly></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field v-model="user.password" label="Mot de passe" type="password" readonly></v-text-field>
