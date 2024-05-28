@@ -18,7 +18,7 @@ CREATE TABLE avatars (
     file_name VARCHAR(255) NOT NULL,
     file_type VARCHAR(50) NOT NULL,
     file_size INT NOT NULL,
-    file_data LONGBLOB NOT NULL -- Storing image data
+    file_data LONGTEXT NOT NULL
 );
 
 -- Users
@@ -56,7 +56,7 @@ CREATE TABLE artworks (
     file_name VARCHAR(255) NOT NULL,
     file_type VARCHAR(50) NOT NULL,
     file_size INT NOT NULL,
-    file_data LONGBLOB NOT NULL, -- Storing image data
+    file_data LONGTEXT NOT NULL,
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     visible BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (portfolio_id) REFERENCES portfolios(portfolio_id) ON DELETE CASCADE

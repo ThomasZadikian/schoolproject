@@ -6,7 +6,6 @@ async function imageUploadService (req, res) {
   const artworkData = req.body;
   conn = await connection.getConnection();
   try {
-    console.log(artworkData.file_data + 'Part 1')
     const [upload] = await conn.execute(
       `INSERT INTO 
         artworks (portfolio_id, title, description, media_type, file_name, file_type, file_size, file_data, creation_date, visible) 
@@ -23,8 +22,7 @@ async function imageUploadService (req, res) {
       ]
     ) ;
       if (upload) {
-        console.log(artworkData.portfolio_id)
-      console.log('Artwork uploaded successfully');
+      res.json("File completly upload")
   }
     } catch(error) {
       console.error('SQL Error:', error.sqlMessage);

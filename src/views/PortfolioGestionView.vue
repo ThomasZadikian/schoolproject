@@ -6,7 +6,27 @@ import error from '@/components/shared/error.vue';
 import colorsEnum from '@/core/types/enums/colorsEnum';
 import { useUserStore } from '@/store/userUserStore';
 
-let file = ref<File | null | Blob>(null); 
+interface FormDataValue {
+  file_data: string;
+  [key: string]: any; // Pour couvrir toutes les autres propriétés dynamiques
+}
+
+const formData2: { value: FormDataValue } = { value: { file_data: '' } };
+const file: { value: File | null } = { value: null };
+
+
+interface ImageItem {
+  imageURL: string;
+  title: string;
+  description: string;
+  artwork_id: number;
+  creation_date: string;
+  file_name: string;
+  file_size: number;
+  media_type: string;
+  portfolio_id: number;
+  visible: number;
+}
 
 const formData: Ref<ArtworkModelUpload> = ref({
     portfolio_id : 19,
@@ -16,7 +36,7 @@ const formData: Ref<ArtworkModelUpload> = ref({
     file_name: '',
     file_type: '',
     file_size: 0,
-    file_data: new Uint8Array(), 
+    file_data: '', 
 })
 
 const errorMessage = ref('');
@@ -26,7 +46,7 @@ const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'video/mp4'];
 const portfolio_id = ref(); 
 const userStore = useUserStore(); 
 const user = userStore.getUser(); 
-const images = ref([])
+const images = ref<ImageItem[]>([]);
 const loading = ref(false); 
 
 onMounted(() => {
@@ -44,20 +64,33 @@ const fetchImages = async () => {
                 },
                 body: JSON.stringify( portfolio_id.value)
             })
-        if (!response.ok) {
+        if (!response.ok) { 
           throw new Error('Failed to fetch images');
         }
         const data = await response.json();
-        console.log('Je passe après data')
-        images.value += data.file_data;
-        console.log(images.value)
-      } catch (err : string | any) {
+        console.log(data)
+for (const item of data.upload) {
+  const imageURL = `data:${item.file_type};base64,${item.file_data}`;
+  images.value.push({
+    imageURL: imageURL,
+    title: item.title,
+    description: item.description,
+    artwork_id: item.artwork_id,
+    creation_date: item.creation_date,
+    file_name: item.file_name,
+    file_size: item.file_size,
+    media_type: item.media_type,
+    portfolio_id: item.portfolio_id,
+    visible: item.visible
+  });
+}
+      } 
+      catch (err : string | any) {
         errorMessage.value = err.message;
       } finally {
         loading.value = false;
       }
-    }
- 
+    } 
 
 const onFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -96,34 +129,52 @@ const onFileChange = (event: Event) => {
       }
     };
 
-const uploadImage = () => {
-  if(file.value){
+    const uploadImage = () => {
+  if (file.value) {
     const fileReader = new FileReader();
     fileReader.readAsArrayBuffer(file.value);
     fileReader.onload = async () => {
-      if(file.value){
-        const blob = new Blob([fileReader.result as ArrayBuffer], { type: file.value.type });
-        const arrayBuffer = await blob.arrayBuffer();
-        const uint8Array = new Uint8Array(arrayBuffer);
-        formData.value.file_data = uint8Array; 
+      if (file.value) {
         try {
+          const arrayBuffer = fileReader.result as ArrayBuffer;
+          const uint8Array = new Uint8Array(arrayBuffer);
+          const base64String = uint8ArrayToBase64(uint8Array);
+          formData.value.file_data = base64String;
           const response = await fetch('/api/imageUploadService', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData.value)
-            })
-            if(!response.ok){
-
-            } else {
-              console.log("erreur"); 
-            }
-        } catch {console.log('bug')}
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData.value)
+          });
+          
+          if (!response.ok) {
+            console.error('Upload failed');
+          } else {
+            const result = await response.json();
+            console.log('Upload success:', result);
+          }
+        } catch (error) {
+          console.error('Error during upload:', error);
+        }
       }
-    }
+    };
+    fileReader.onerror = (error) => {
+      console.error('FileReader error:', error);
+    };
   }
+};
+
+function uint8ArrayToBase64(uint8Array: Uint8Array): string {
+  const chunkSize = 0x8000;
+  let base64String = '';
+  for (let i = 0; i < uint8Array.length; i += chunkSize) {
+    const chunk = uint8Array.subarray(i, i + chunkSize);
+    base64String += String.fromCharCode.apply(null, chunk as unknown as number[]);
+  }
+  return btoa(base64String);
 }
+
 
 </script>
 <template>
@@ -155,5 +206,11 @@ const uploadImage = () => {
     <v-btn @click="fetchImages">
       Recupérer les imlages
     </v-btn>
+    <div v-for="img in images" :key="img.artwork_id">
+   {{console.log(img.imageURL)}}
+      <img :src="img.imageURL">
+        <span>Je suis là</span>
+      </img>
+    </div>
   </v-container>
 </template>
